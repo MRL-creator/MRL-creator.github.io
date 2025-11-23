@@ -1,178 +1,353 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Python Automation Portfolio</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <title>Python Automation Workflows – Ramal Maharramli</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta
+    name="description"
+    content="Python automation developer specializing in browser workflows, PDF/Excel processing, email automation, and API-based scripts."
+  />
   <style>
     :root {
-      --bg: #0f172a;
+      --bg: #020617;
+      --bg-soft: #020617;
+      --bg-card: #020617;
       --bg-alt: #020617;
       --accent: #38bdf8;
-      --accent-soft: rgba(56, 189, 248, 0.1);
+      --accent-soft: rgba(56, 189, 248, 0.16);
+      --accent-strong: #0ea5e9;
       --text: #e5e7eb;
       --muted: #9ca3af;
-      --card: #0b1220;
-      --border: #1e293b;
-      --radius: 16px;
+      --border: #1f2937;
+      --radius: 18px;
+      --radius-sm: 10px;
+      --shadow-soft: 0 22px 40px rgba(15, 23, 42, 0.85);
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top, #1e293b 0, #020617 50%, #000 100%);
+      background:
+        radial-gradient(circle at top, rgba(56, 189, 248, 0.12) 0, transparent 55%),
+        radial-gradient(circle at bottom, rgba(59, 130, 246, 0.16) 0, #020617 60%);
       color: var(--text);
       line-height: 1.5;
-      padding: 1.5rem;
+      min-height: 100vh;
     }
 
-    .container { max-width: 1000px; margin: 0 auto; }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-    header {
+    .page {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 1.5rem 1.25rem 2.5rem;
+    }
+
+    /* NAVBAR */
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      backdrop-filter: blur(16px);
+      background: linear-gradient(to bottom, rgba(2, 6, 23, 0.92), rgba(2, 6, 23, 0.75), transparent);
+      margin-bottom: 1.2rem;
+    }
+
+    .nav-inner {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      margin-bottom: 2rem;
+      justify-content: space-between;
       gap: 1rem;
+      padding-bottom: 0.35rem;
+      border-bottom: 1px solid rgba(15, 23, 42, 0.8);
     }
 
-    .logo {
-      font-weight: 600;
-      font-size: 1.1rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--muted);
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
     }
 
-    .tagline {
-      font-size: 0.9rem;
-      color: var(--muted);
-    }
-
-    .badge {
+    .logo-mark {
+      width: 32px;
+      height: 32px;
       border-radius: 999px;
-      border: 1px solid var(--accent-soft);
-      background: rgba(15,23,42,0.7);
-      padding: 0.35rem 0.9rem;
-      font-size: 0.8rem;
+      background: radial-gradient(circle at 30% 10%, #e5e7eb 0, #38bdf8 40%, #0f172a 100%);
       display: inline-flex;
       align-items: center;
-      gap: 0.4rem;
+      justify-content: center;
+      box-shadow: 0 10px 25px rgba(8, 47, 73, 0.9);
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #020617;
     }
 
-    .badge-dot {
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      gap: 0.1rem;
+    }
+
+    .logo-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #e5e7eb;
+    }
+
+    .logo-sub {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .nav-links a {
+      position: relative;
+      padding: 0.25rem 0.4rem;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0.4rem;
+      right: 0.4rem;
+      bottom: -0.1rem;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--accent), transparent);
+      opacity: 0;
+      transform: scaleX(0.7);
+      transition: opacity 0.18s ease, transform 0.18s ease;
+    }
+
+    .nav-links a:hover::after {
+      opacity: 1;
+      transform: scaleX(1);
+    }
+
+    .nav-badge {
+      border-radius: 999px;
+      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.35), rgba(15, 23, 42, 0.9));
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      padding: 0.25rem 0.7rem;
+      font-size: 0.75rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      color: #e5e7eb;
+    }
+
+    .nav-dot {
       width: 7px;
       height: 7px;
       border-radius: 999px;
       background: #22c55e;
+      box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.26);
     }
 
-    main {
+    @media (max-width: 740px) {
+      .nav-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.6rem;
+      }
+      .nav-links {
+        font-size: 0.8rem;
+        gap: 0.7rem;
+      }
+    }
+
+    /* LAYOUT */
+
+    .grid {
       display: grid;
-      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
-      gap: 2rem;
+      grid-template-columns: minmax(0, 5fr) minmax(0, 4fr);
+      gap: 1.8rem;
+      align-items: flex-start;
+      margin-top: 1.2rem;
+      margin-bottom: 2.1rem;
     }
 
-    @media (max-width: 800px) {
-      main { grid-template-columns: 1fr; }
-      header { flex-direction: column; align-items: flex-start; }
+    @media (max-width: 880px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* HERO */
+
+    .eyebrow {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--muted);
+      margin-bottom: 0.45rem;
     }
 
     .hero-title {
-      font-size: clamp(2rem, 3vw, 2.6rem);
+      font-size: clamp(2rem, 3.1vw, 2.8rem);
       font-weight: 600;
-      margin-bottom: 0.75rem;
+      line-height: 1.15;
+      margin-bottom: 0.6rem;
     }
 
-    .hero-title span { color: var(--accent); }
+    .hero-title span {
+      color: var(--accent);
+    }
 
-    .hero-subtitle {
+    .hero-sub {
+      font-size: 0.98rem;
       color: var(--muted);
       max-width: 32rem;
-      font-size: 0.98rem;
-      margin-bottom: 1.3rem;
+      margin-bottom: 1rem;
     }
 
-    .chips {
+    .hero-tags {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-bottom: 1.5rem;
+      gap: 0.4rem;
+      margin-bottom: 1.4rem;
     }
 
-    .chip {
-      font-size: 0.8rem;
-      padding: 0.3rem 0.7rem;
+    .tag-chip {
       border-radius: 999px;
-      background: rgba(15,23,42,0.85);
       border: 1px solid var(--border);
-      color: var(--muted);
+      background: rgba(15, 23, 42, 0.85);
+      padding: 0.3rem 0.7rem;
+      font-size: 0.78rem;
+      color: #cbd5f5;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
     }
 
-    .chip strong { color: var(--accent); font-weight: 500; }
+    .tag-bullet {
+      width: 5px;
+      height: 5px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
 
-    .hero-buttons {
+    .hero-actions {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.75rem;
+      gap: 0.7rem;
+      margin-bottom: 1.2rem;
     }
 
     .btn {
-      border-radius: 999px;
-      border: 1px solid transparent;
-      padding: 0.55rem 1.3rem;
-      font-size: 0.9rem;
-      text-decoration: none;
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
-      cursor: default;
+      gap: 0.45rem;
+      border-radius: 999px;
+      padding: 0.55rem 1.25rem;
+      font-size: 0.9rem;
+      border: 1px solid transparent;
+      cursor: pointer;
+      text-decoration: none;
+      white-space: nowrap;
     }
 
     .btn-primary {
       background: linear-gradient(135deg, #38bdf8, #0ea5e9);
-      color: #0b1120;
-      font-weight: 500;
+      color: #020617;
+      font-weight: 600;
+      box-shadow: 0 16px 28px rgba(8, 47, 73, 0.9);
+    }
+
+    .btn-primary span.icon {
+      font-size: 1.1rem;
     }
 
     .btn-ghost {
-      background: transparent;
+      background: rgba(15, 23, 42, 0.85);
       border-color: var(--border);
       color: var(--muted);
     }
 
-    .btn span.icon { font-size: 1.1rem; }
+    .btn-ghost span.icon {
+      font-size: 1rem;
+    }
+
+    .hero-note {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .hero-note span {
+      color: var(--accent);
+    }
+
+    /* RIGHT PANEL */
 
     .panel {
       border-radius: var(--radius);
       border: 1px solid var(--border);
-      background: radial-gradient(circle at top, #111827 0, #020617 70%);
-      padding: 1.25rem;
-      box-shadow: 0 18px 30px rgba(15,23,42,0.7);
+      background:
+        radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.12), transparent 60%),
+        radial-gradient(circle at 100% 100%, rgba(37, 99, 235, 0.18), transparent 55%),
+        rgba(15, 23, 42, 0.96);
+      padding: 1.2rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.6rem;
+      gap: 0.75rem;
     }
 
     .panel-title {
       font-size: 0.95rem;
       font-weight: 500;
-      margin-bottom: 0.75rem;
-      color: #e5e7eb;
     }
 
-    .project-grid { display: grid; gap: 0.8rem; }
+    .panel-pill {
+      font-size: 0.75rem;
+      padding: 0.2rem 0.7rem;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid rgba(56, 189, 248, 0.6);
+    }
+
+    .project-list {
+      display: grid;
+      gap: 0.8rem;
+      margin-bottom: 0.9rem;
+    }
 
     .project-card {
-      background: rgba(15,23,42,0.9);
-      border-radius: 12px;
+      border-radius: var(--radius-sm);
       border: 1px solid var(--border);
-      padding: 0.8rem 0.9rem;
+      background: rgba(15, 23, 42, 0.92);
+      padding: 0.75rem 0.85rem;
     }
 
-    .project-header {
+    .project-heading {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 0.3rem;
+      margin-bottom: 0.25rem;
       gap: 0.5rem;
     }
 
@@ -181,182 +356,554 @@
       font-weight: 500;
     }
 
-    .project-pill {
+    .project-type {
       font-size: 0.7rem;
-      padding: 0.2rem 0.6rem;
       border-radius: 999px;
-      background: var(--accent-soft);
-      color: var(--accent);
+      padding: 0.15rem 0.55rem;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid var(--border);
+      color: var(--muted);
     }
 
     .project-desc {
-      font-size: 0.83rem;
-      color: var(--muted);
-      margin-bottom: 0.4rem;
-    }
-
-    .project-tech {
-      font-size: 0.75rem;
-      color: var(--muted);
-    }
-
-    .project-tech span { color: var(--accent); }
-
-    .code-block {
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      font-size: 0.78rem;
-      background: #020617;
-      border-radius: 10px;
-      padding: 0.9rem;
-      border: 1px solid var(--border);
-      color: #e5e7eb;
-      overflow-x: auto;
-      position: relative;
-    }
-
-    .code-title {
-      font-size: 0.75rem;
-      color: var(--muted);
-      margin-bottom: 0.4rem;
-    }
-
-    footer {
-      margin-top: 2.5rem;
-      border-top: 1px solid var(--border);
-      padding-top: 1rem;
       font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 0.35rem;
+    }
+
+    .project-meta {
+      font-size: 0.75rem;
       color: var(--muted);
       display: flex;
       flex-wrap: wrap;
-      gap: 0.6rem;
+      gap: 0.4rem;
+      align-items: center;
+    }
+
+    .project-meta span.tech {
+      color: var(--accent);
+    }
+
+    .project-meta a {
+      font-size: 0.75rem;
+      color: var(--accent-strong);
+    }
+
+    .snippet-block {
+      margin-top: 0.8rem;
+    }
+
+    .snippet-title {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-bottom: 0.25rem;
+      display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 0.4rem;
+    }
+
+    .snippet-title span.label {
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.72rem;
+      color: #64748b;
+    }
+
+    .code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+        "Courier New", monospace;
+      font-size: 0.8rem;
+      background: #020617;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      padding: 0.7rem 0.8rem;
+      color: #e5e7eb;
+      overflow-x: auto;
+      white-space: pre;
+    }
+
+    /* SECTIONS */
+
+    section {
+      margin-bottom: 1.9rem;
+    }
+
+    .section-title {
+      font-size: 0.98rem;
+      font-weight: 500;
+      margin-bottom: 0.8rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .section-title span.dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    .section-sub {
+      font-size: 0.86rem;
+      color: var(--muted);
+      max-width: 40rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .pill {
+      font-size: 0.78rem;
+      border-radius: 999px;
+      padding: 0.3rem 0.7rem;
+      border: 1px solid var(--border);
+      background: rgba(15, 23, 42, 0.85);
+      color: #cbd5f5;
+    }
+
+    .pill span {
+      color: var(--accent);
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      gap: 1rem;
+    }
+
+    @media (max-width: 840px) {
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .stack-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 0.55rem;
+      font-size: 0.8rem;
+    }
+
+    .stack-item {
+      border-radius: 999px;
+      padding: 0.4rem 0.7rem;
+      border: 1px solid var(--border);
+      background: rgba(15, 23, 42, 0.9);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.6rem;
+      color: var(--muted);
+    }
+
+    .stack-item span.name {
+      color: #e5e7eb;
+      font-size: 0.82rem;
+    }
+
+    .steps-list {
+      font-size: 0.82rem;
+      color: var(--muted);
+      display: grid;
+      gap: 0.4rem;
+      counter-reset: steps;
+    }
+
+    .steps-list li {
+      list-style: none;
+      position: relative;
+      padding-left: 1.6rem;
+    }
+
+    .steps-list li::before {
+      counter-increment: steps;
+      content: counter(steps);
+      position: absolute;
+      left: 0;
+      top: 0.08rem;
+      width: 1.1rem;
+      height: 1.1rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid var(--accent-soft);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.65rem;
+      color: var(--accent);
+    }
+
+    .contact-card {
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: rgba(15, 23, 42, 0.95);
+      padding: 0.9rem 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      margin-top: 0.7rem;
+    }
+
+    .contact-card p {
+      color: var(--muted);
+      max-width: 24rem;
+    }
+
+    /* FOOTER */
+
+    footer {
+      margin-top: 2.1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.78rem;
+      color: var(--muted);
     }
 
     .footer-links {
       display: flex;
-      gap: 0.8rem;
       flex-wrap: wrap;
+      gap: 0.75rem;
     }
 
     .footer-links a {
       color: var(--accent);
       text-decoration: none;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
+    }
+
+    /* SMOOTH SCROLL */
+
+    html {
+      scroll-behavior: smooth;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <div>
-        <div class="logo">PYTHON AUTOMATION</div>
-        <div class="tagline">Browser tasks, emails, documents & workflows — automated.</div>
-      </div>
-      <div class="badge">
-        <span class="badge-dot"></span>
-        Available for new projects
+  <div class="page">
+    <header class="nav">
+      <div class="nav-inner">
+        <div class="nav-left">
+          <div class="logo-mark">Py</div>
+          <div class="logo-text">
+            <div class="logo-title">Python Automation</div>
+            <div class="logo-sub">Workflows · Browser · Documents</div>
+          </div>
+        </div>
+        <div class="nav-links">
+          <a href="#services">Services</a>
+          <a href="#projects">Examples</a>
+          <a href="#stack">Tech stack</a>
+          <a href="#process">How I work</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <div class="nav-badge">
+          <span class="nav-dot"></span>
+          Available for new async projects
+        </div>
       </div>
     </header>
 
     <main>
-      <!-- LEFT SIDE: INTRO -->
-      <section>
-        <h1 class="hero-title">
-          I build <span>Python automation scripts</span> for real-world workflows.
-        </h1>
-        <p class="hero-subtitle">
-          I specialize in automating repetitive website, email, and document tasks using clean, reliable Python scripts.
-          Here are a few example automations I can build.
-        </p>
+      <div class="grid">
+        <!-- LEFT: HERO -->
+        <section>
+          <div class="eyebrow">Python automation developer</div>
+          <h1 class="hero-title">
+            I build <span>automation scripts</span> that remove repetitive work.
+          </h1>
+          <p class="hero-sub">
+            I specialize in browser workflows, PDF/Excel processing, email tasks, and small internal tools using
+            Python. If you repeat it every day, I can probably automate it.
+          </p>
 
-        <div class="chips">
-          <div class="chip"><strong>Website</strong> login & form submission</div>
-          <div class="chip"><strong>Email</strong> sending & filtering</div>
-          <div class="chip"><strong>PDF / Excel</strong> processing</div>
-          <div class="chip"><strong>APIs</strong> & workflow automation</div>
-        </div>
-
-        <div class="hero-buttons">
-          <div class="btn btn-primary">
-            <span class="icon">▶</span>
-            Example automations below
-          </div>
-          <div class="btn btn-ghost">
-            <span class="icon">💬</span>
-            Contact me via Upwork
-          </div>
-        </div>
-      </section>
-
-      <!-- RIGHT SIDE: PROJECTS + CODE -->
-      <aside class="panel">
-        <div class="panel-title">Sample automation projects</div>
-        <div class="project-grid">
-          <div class="project-card">
-            <div class="project-header">
-              <div class="project-name">Website Login & Form Automation</div>
-              <div class="project-pill">Browser workflow</div>
-            </div>
-            <div class="project-desc">
-              Opens a website, logs in with saved credentials, navigates to a page, fills and submits a form automatically.
-            </div>
-            <div class="project-tech">
-              Tech: <span>Python, Selenium, ChromeDriver</span>
-            </div>
+          <div class="hero-tags">
+            <div class="tag-chip"><span class="tag-bullet"></span> Browser task automation</div>
+            <div class="tag-chip"><span class="tag-bullet"></span> PDF / Excel workflows</div>
+            <div class="tag-chip"><span class="tag-bullet"></span> Email & API integrations</div>
           </div>
 
-          <div class="project-card">
-            <div class="project-header">
-              <div class="project-name">PDF → Excel Report Helper</div>
-              <div class="project-pill">Documents</div>
+          <div class="hero-actions">
+            <a
+              class="btn btn-primary"
+              href="YOUR_UPWORK_PROFILE_URL_HERE"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <span class="icon">⬤</span>
+              View my Upwork profile
+            </a>
+            <a class="btn btn-ghost" href="#projects">
+              <span class="icon">▶</span>
+              See example automations
+            </a>
+          </div>
+
+          <div class="hero-note">
+            Built by <span>Ramal Maharramli</span> · Python automation, scripting, workflow tools.
+          </div>
+        </section>
+
+        <!-- RIGHT: PROJECT SNAPSHOT + CODE -->
+        <aside class="panel">
+          <div class="panel-header">
+            <div>
+              <div class="panel-title">Sample automation workflows</div>
+              <div style="font-size: 0.78rem; color: var(--muted);">
+                Realistic examples of the kind of scripts I build for clients.
+              </div>
             </div>
-            <div class="project-desc">
-              Reads a structured PDF report and prepares a clean Excel summary ready for analysis.
+            <div class="panel-pill">Python · Selenium · APIs</div>
+          </div>
+
+          <div class="project-list">
+            <div class="project-card">
+              <div class="project-heading">
+                <div class="project-name">Website login & form automation</div>
+                <div class="project-type">Browser</div>
+              </div>
+              <div class="project-desc">
+                Opens a dashboard, logs in with stored credentials, navigates to a page, and submits a form
+                automatically.
+              </div>
+              <div class="project-meta">
+                <span class="tech">Python · Selenium</span>
+                <span>Multi-step navigation · Reusable config</span>
+              </div>
             </div>
-            <div class="project-tech">
-              Tech: <span>Python, pandas, PyPDF2, openpyxl</span>
+
+            <div class="project-card">
+              <div class="project-heading">
+                <div class="project-name">PDF → Excel report helper</div>
+                <div class="project-type">Documents</div>
+              </div>
+              <div class="project-desc">
+                Reads a structured PDF report and prepares a clean Excel table ready for analysis or import into your
+                system.
+              </div>
+              <div class="project-meta">
+                <span class="tech">Python · pandas · PyPDF2</span>
+                <span>Data cleaning · Column mapping</span>
+              </div>
+            </div>
+
+            <div class="project-card">
+              <div class="project-heading">
+                <div class="project-name">Email workflow assistant</div>
+                <div class="project-type">Email</div>
+              </div>
+              <div class="project-desc">
+                Flags specific emails, labels them, and saves attachments according to simple rules.
+              </div>
+              <div class="project-meta">
+                <span class="tech">Python · Gmail/IMAP</span>
+                <span>Rules-based labeling</span>
+              </div>
             </div>
           </div>
 
-          <div class="project-card">
-            <div class="project-header">
-              <div class="project-name">Email Workflow Assistant</div>
-              <div class="project-pill">Email</div>
+          <div class="snippet-block">
+            <div class="snippet-title">
+              <span class="label">Small example snippet</span>
+              <span style="font-size: 0.7rem; color: var(--muted);">Simplified, for illustration only</span>
             </div>
-            <div class="project-desc">
-              Scans incoming emails for keywords and flags messages or prepares draft responses.
-            </div>
-            <div class="project-tech">
-              Tech: <span>Python, Gmail API / IMAP, SMTP</span>
-            </div>
-          </div>
-        </div>
-
-        <div style="margin-top: 1rem;">
-          <div class="code-title">Small example snippet (simplified):</div>
-          <div class="code-block">
-<pre><code>from selenium import webdriver
+            <div class="code">
+from selenium import webdriver
+from selenium.webdriver.common.by import By
 
 driver = webdriver.Chrome()
 driver.get("https://example.com/login")
 
-user = driver.find_element("id", "username")
+user = driver.find_element(By.ID, "username")
 user.send_keys("demo_user")
 
-btn = driver.find_element("id", "submit")
+btn = driver.find_element(By.ID, "submit")
 btn.click()
 
-print("Login flow automated.")</code></pre>
+print("Login flow automated.")
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <!-- SERVICES -->
+      <section id="services">
+        <h2 class="section-title">
+          <span class="dot"></span>
+          Services – what I can automate
+        </h2>
+        <p class="section-sub">
+          I focus on small to medium-sized workflows that save hours per week, are easy to maintain, and don’t require
+          huge infrastructure. Typical work includes:
+        </p>
+        <div class="pill-row">
+          <div class="pill"><span>Browser:</span> logins, dashboards, multi-step flows</div>
+          <div class="pill"><span>Documents:</span> PDF → Excel, cleaning CSVs, formatting</div>
+          <div class="pill"><span>Email:</span> labeling, forwarding, saving attachments</div>
+          <div class="pill"><span>APIs:</span> pulling data, syncing tools, triggering flows</div>
+          <div class="pill"><span>Files:</span> rename, organize, move, archive</div>
+        </div>
+      </section>
+
+      <!-- PROJECTS -->
+      <section id="projects">
+        <h2 class="section-title">
+          <span class="dot"></span>
+          Example automation projects
+        </h2>
+        <p class="section-sub">
+          Below are a few example scenarios that are similar to the work I can do for you. Exact details depend on your
+          tools, websites, and file formats.
+        </p>
+
+        <div class="two-col">
+          <div>
+            <h3 style="font-size: 0.88rem; margin-bottom: 0.35rem;">1. Client dashboard workflow</h3>
+            <p style="font-size: 0.83rem; color: var(--muted); margin-bottom: 0.45rem;">
+              A script that logs into a web portal, navigates to a reporting page, applies filters, and exports the
+              available report. Useful for daily or weekly manual tasks.
+            </p>
+            <ul class="steps-list">
+              <li>Open site, accept cookies, go to login page.</li>
+              <li>Enter stored credentials and two or three clicks to reach the target page.</li>
+              <li>Apply filters / date range, then click “Export”.</li>
+              <li>Save the file to a specific folder with a consistent name.</li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 style="font-size: 0.88rem; margin-bottom: 0.35rem;">2. Monthly PDF report → Excel</h3>
+            <p style="font-size: 0.83rem; color: var(--muted); margin-bottom: 0.45rem;">
+              A helper script that takes a monthly PDF, extracts certain tables, and writes them into one clean Excel
+              sheet with proper headers.
+            </p>
+            <ul class="steps-list">
+              <li>Load a sample PDF and detect the relevant pages/sections.</li>
+              <li>Extract tables as raw rows.</li>
+              <li>Clean and normalize the columns (types, headers).</li>
+              <li>Export as an Excel file ready for analysis or import.</li>
+            </ul>
           </div>
         </div>
-      </aside>
+      </section>
+
+      <!-- STACK -->
+      <section id="stack">
+        <h2 class="section-title">
+          <span class="dot"></span>
+          Tech stack – tools I use
+        </h2>
+        <p class="section-sub">
+          Most of my work is in Python, with a focus on reliability and clear structure rather than over-complicated
+          architectures.
+        </p>
+
+        <div class="stack-list">
+          <div class="stack-item">
+            <span class="name">Python</span>
+            <span>Core scripting, automation</span>
+          </div>
+          <div class="stack-item">
+            <span class="name">Selenium / Playwright</span>
+            <span>Browser workflows</span>
+          </div>
+          <div class="stack-item">
+            <span class="name">pandas / openpyxl</span>
+            <span>Excel & CSV work</span>
+          </div>
+          <div class="stack-item">
+            <span class="name">PyPDF2 / pdfplumber</span>
+            <span>PDF processing</span>
+          </div>
+          <div class="stack-item">
+            <span class="name">Gmail / IMAP APIs</span>
+            <span>Email automation</span>
+          </div>
+          <div class="stack-item">
+            <span class="name">GitHub</span>
+            <span>Version control</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROCESS -->
+      <section id="process">
+        <h2 class="section-title">
+          <span class="dot"></span>
+          How I typically work
+        </h2>
+        <p class="section-sub">
+          The goal is always the same: understand your workflow, automate the boring parts, and leave you with something
+          easy to run again in the future.
+        </p>
+
+        <ol class="steps-list">
+          <li>You describe your current workflow (screenshots or steps).</li>
+          <li>We agree on what can be safely automated.</li>
+          <li>I build a Python script or small tool around your process.</li>
+          <li>We test it together with a few examples.</li>
+          <li>You get the code, instructions, and any small adjustments needed.</li>
+        </ol>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact">
+        <h2 class="section-title">
+          <span class="dot"></span>
+          Contact & next steps
+        </h2>
+        <p class="section-sub">
+          If you already have a workflow in mind, feel free to send it as a message on Upwork. A rough outline is
+          enough to start.
+        </p>
+
+        <div class="contact-card">
+          <p>
+            Preferred contact: <strong>Upwork messages</strong> for new projects.  
+            I’m comfortable with one-off scripts, ongoing improvements, or helping you maintain existing automation.
+          </p>
+          <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+            <a
+              class="btn btn-primary"
+              href="YOUR_UPWORK_PROFILE_URL_HERE"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <span class="icon">💼</span>
+              Open my Upwork profile
+            </a>
+            <a
+              class="btn btn-ghost"
+              href="https://github.com/MRL-creator"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <span class="icon">🌐</span>
+              View my GitHub
+            </a>
+          </div>
+        </div>
+      </section>
     </main>
 
     <footer>
-      <div>Interested in something similar? You can reach me via Upwork.</div>
+      <div>© 2025 Ramal Maharramli · Python automation & workflows.</div>
       <div class="footer-links">
-        <a href="https://www.upwork.com/freelancers/~015e14ee5ede6caf72?mp_source=share" target="_blank">Upwork Profile</a>
+        <a href="https://www.upwork.com/freelancers/~015e14ee5ede6caf72?mp_source=share" target="_blank" rel="noreferrer">Upwork</a>
+        <a href="https://github.com/MRL-creator" target="_blank" rel="noreferrer">GitHub</a>
       </div>
     </footer>
   </div>
